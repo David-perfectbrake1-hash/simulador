@@ -1,6 +1,7 @@
-//AQUI TODA LA LOGICA DE LAS FUNCIONES DEL NEGOCIO
-//funciones.js
+// AQUI TODA LA LOGICA DE LAS FUNCIONES DEL NEGOCIO
+// funciones.js
 
+// Calcula el valor disponible (ingresos - egresos). Retorna 0 si es negativo.
 function calcularDisponible(ingresos, egresos) {
     let disponible = ingresos - egresos;
     if (disponible < 0) {
@@ -9,44 +10,31 @@ function calcularDisponible(ingresos, egresos) {
     return disponible;
 }
 
+// Calcula la capacidad de pago (50% del disponible).
 function calcularCapacidadPago(montoDisponible) {
-    // Multiplicamos el disponible por 0.50 (que es el 50%)
-    let capacidad = montoDisponible * 0.50;
-    
-    // Devolvemos el resultado
-    return capacidad;
+    return montoDisponible * 0.5;
 }
 
-function calcularInteresSimple(monto, tasa, plazoAnios) {
-    // Calculamos el interés: monto * (tasa / 100) * plazo en años
-    let interes = monto * (tasa / 100) * plazoAnios;
-    return interes;
+// Calcula el interés simple. La tasa se divide para 100.
+function calcularInteresSimple(Monto, Tasa, plazoAnios) {
+    return Monto * plazoAnios * (Tasa / 100);
 }
 
+// Calcula el total a pagar sumando monto, interés y 100 de impuestos/SOLCA.
 function calcularTotalPagar(monto, interes) {
-    // Sumamos: monto + interés + 100 (impuestos/SOLCA)
-    let total = monto + interes + 100;
-    
-    // Devolvemos el resultado
-    return total;
+    return monto + interes + 100;
 }
 
+// Calcula la cuota mensual dividiendo el total para los meses (años * 12).
 function calcularCuotaMensual(total, plazoAnios) {
-    // Primero convertimos años a meses (1 año = 12 meses)
-    let meses = plazoAnios * 12;
-    
-    // Dividimos el total entre el número de meses
-    let cuota = total / meses;
-    
-    // Devolvemos el resultado
-    return cuota;
+    return total / (plazoAnios * 12);
 }
 
+// Retorna true si la capacidad es mayor a la cuota, caso contrario false.
 function aprobarCredito(capacidadPago, cuotaMensual) {
-    // Si la capacidad de pago es mayor o igual a la cuota mensual...
-    if (capacidadPago >= cuotaMensual) {
-        return true; // ✅ Crédito aprobado
+    if (capacidadPago > cuotaMensual) {
+        return true;
     } else {
-        return false; // ❌ Crédito rechazado
+        return false;
     }
 }
