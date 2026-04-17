@@ -22,4 +22,15 @@ function calcular() {
 
     // Mostramos el resultado en pantalla
     document.getElementById("spnCapacidadPago").textContent = "USD " + resultadoCapacidad.toFixed(2);
+
+    //PASO 7: Leer monto, plazo y tasa como ENTEROS
+    let monto = parseInt(document.getElementById("txtMonto").value);
+    let plazo = parseInt(document.getElementById("txtPlazo").value);
+    let tasa = parseInt(document.getElementById("txtTasaInteres").value);
+
+    // Llamar a calcularInteresSimple y guardar el resultado
+    let resultadoInteres = calcularInteresSimple(monto, tasa, plazo);
+
+    // Mostrar en pantalla el resultado del interés a pagar
+    document.getElementById("spnInteresPagar").textContent = "USD " + resultadoInteres.toFixed(2);
 }
