@@ -33,4 +33,10 @@ function calcular() {
 
     // Mostrar en pantalla el resultado del interés a pagar
     document.getElementById("spnInteresPagar").textContent = "USD " + resultadoInteres.toFixed(2);
+
+    //Calcular total a pagar
+    let resultadoTotal = calcularTotalPagar(monto, resultadoInteres);
+    
+    // Mostrar en pantalla el resultado del total a pagar
+    document.getElementById("spnTotalPrestamo").textContent = "USD " + resultadoTotal.toFixed(2);
 }
