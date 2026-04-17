@@ -1,0 +1,13 @@
+Implementa una validación en JavaScript 
+que bloquee físicamente 
+la entrada en los campos numéricos 
+del simulador una vez alcanzado el límite de dígitos 
+en la parte entera, 
+impidiendo seguir escribiendo 
+o pegando caracteres adicionales. 
+El código debe recortar automáticamente 
+el valor en tiempo real 
+mediante eventos de entrada, 
+manteniendo compatibilidad 
+con los IDs actuales 
+y permitiendo la edición fluida de decimales.

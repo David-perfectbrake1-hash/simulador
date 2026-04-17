@@ -1,0 +1,47 @@
+Actúa como desarrollador frontend 
+experto en interfaces bancarias de alto nivel. 
+Implementa un botón de alternancia 
+a modo oscuro 
+en la esquina superior derecha 
+del simulador, 
+posicionado de forma responsive 
+(adaptado a móvil, 
+tablet y escritorio 
+sin solapar contenido ni romper el layout).
+Requerimiento Especial de Diseño: 
+El botón debe ser 
+extremadamente elegante y llamativo, 
+funcionando como un elemento 
+de 'Call to Action' visual. 
+Debe tener:
+Efecto Glassmorphism 
+o un gradiente sutil 
+que denote modernidad empresarial.
+Micro-interacciones: 
+Un cambio de escala suave (scale) 
+al pasar el mouse 
+y una animación de rotación o desvanecimiento 
+al cambiar entre el icono de sol y luna.
+Sombra Dinámica: 
+Una elevación visual (box-shadow) 
+que lo haga destacar sobre el fondo, 
+pero manteniendo la sobriedad bancaria.
+Requerimientos Técnicos:
+El botón debe alternar un atributo 
+data-theme="dark" en <html>.
+Mapear todas las variables CSS de :root 
+a sus equivalentes nocturnos.
+Guardar la preferencia en localStorage 
+y respetar prefers-color-scheme del sistema.
+Incluir transiciones suaves, 
+contraste WCAG 2.1 y accesibilidad (aria-label).
+Entrega:
+Proporciona únicamente los fragmentos 
+exactos a insertar en simulador.html, 
+simulador.css 
+y simulador.js, 
+manteniendo intactos todos los IDs, 
+clases 
+y la lógica JavaScript 
+existente del simulador 
+(como calcular, calcularDisponible, etc.).
