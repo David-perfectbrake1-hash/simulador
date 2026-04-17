@@ -45,4 +45,20 @@ function calcular() {
 
     // Mostrar en pantalla el resultado de la cuota mensual
     document.getElementById("spnCuotaMensual").textContent = "USD " + resultadoCuota.toFixed(2);
-}
+
+    //PASO 14: Determinar si el crédito es aprobado o rechazado
+    // 1. Invocar a aprobarCredito y guardar el resultado (true o false)
+    let creditoAprobado = aprobarCredito(resultadoCapacidad, resultadoCuota);
+
+    // 2. Guardar la referencia al span donde se mostrará el estado
+    let estadoCredito = document.getElementById("spnEstadoCredito");
+
+    // 3. Mostrar mensaje según el resultado
+    if (creditoAprobado == true) {
+        estadoCredito.textContent = "CREDITO APROBADO";
+        estadoCredito.style.color = "green";
+    } else {
+        estadoCredito.textContent = "CREDITO RECHAZADO";
+        estadoCredito.style.color = "red";
+    }
+} 
