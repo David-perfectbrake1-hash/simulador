@@ -16,3 +16,9 @@ function calcularCapacidadPago(montoDisponible) {
     // Devolvemos el resultado
     return capacidad;
 }
+
+function calcularInteresSimple(monto, tasa, plazoAnios) {
+    // Calculamos el interés: monto * (tasa / 100) * plazo en años
+    let interes = monto * (tasa / 100) * plazoAnios;
+    return interes;
+}
