@@ -39,4 +39,10 @@ function calcular() {
     
     // Mostrar en pantalla el resultado del total a pagar
     document.getElementById("spnTotalPrestamo").textContent = "USD " + resultadoTotal.toFixed(2);
+
+    //Paso 11: Calcular cuota mensual
+    let resultadoCuota = calcularCuotaMensual(resultadoTotal, plazo);
+
+    // Mostrar en pantalla el resultado de la cuota mensual
+    document.getElementById("spnCuotaMensual").textContent = "USD " + resultadoCuota.toFixed(2);
 }

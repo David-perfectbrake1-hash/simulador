@@ -41,3 +41,12 @@ function calcularCuotaMensual(total, plazoAnios) {
     // Devolvemos el resultado
     return cuota;
 }
+
+function aprobarCredito(capacidadPago, cuotaMensual) {
+    // Si la capacidad de pago es mayor o igual a la cuota mensual...
+    if (capacidadPago >= cuotaMensual) {
+        return true; // ✅ Crédito aprobado
+    } else {
+        return false; // ❌ Crédito rechazado
+    }
+}
