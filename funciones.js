@@ -22,3 +22,11 @@ function calcularInteresSimple(monto, tasa, plazoAnios) {
     let interes = monto * (tasa / 100) * plazoAnios;
     return interes;
 }
+
+function calcularTotalPagar(monto, interes) {
+    // Sumamos: monto + interés + 100 (impuestos/SOLCA)
+    let total = monto + interes + 100;
+    
+    // Devolvemos el resultado
+    return total;
+}
