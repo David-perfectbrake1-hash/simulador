@@ -1,0 +1,46 @@
+Actúa como un diseñador UI/UX senior 
+especializado en interfaces bancarias corporativas. 
+Necesito que rediseñes el CSS 
+(y ajustes mínimos en el HTML) 
+de un formulario de simulador de crédito 
+para darle un aspecto empresarial moderno, 
+profesional y 100% responsive.
+
+DIRECTRICES DE DISEÑO:
+1. Identidad corporativa: Elige una entidad financiera 
+real o ficticia (ej: "NovaBank Corp") 
+y define su paleta oficial mediante variables CSS (:root). 
+Aplica colores primarios, secundarios, acentos, 
+fondos y tipografía coherente.
+
+2. Responsive design: 
+Usa CSS Grid y Flexbox 
+para que el formulario se adapte automáticamente a móviles 
+(1 columna), tablets (2 columnas) y escritorio. 
+Incluye media queries en 768px y 480px.
+
+3. Estética profesional: 
+Inputs con bordes sutiles, 
+sombras suaves al :focus, 
+transiciones fluidas, 
+botones con estados hover/active claros, 
+y jerarquía visual marcada con espaciado consistente.
+
+4. Logo e identidad: 
+Inserta un placeholder 
+para el logo de la entidad en el <header> 
+(puede ser una URL pública o un SVG inline simple) 
+y agrega un texto de respaldo alt.
+
+5. Compatibilidad: 
+Mantén intactos todos los IDs 
+y clases que usa JavaScript 
+(txtIngresos, errIngresos, IblEstadoCredito, etc.) 
+para no romper la lógica existente.
+
+ENTREGA ESPERADA:
+- Código CSS completo listo para reemplazar simulador.css
+- Fragmento HTML exacto para el header con el logo
+- Breve explicación de las decisiones de diseño 
+y cómo aplicar la paleta elegida
+- Código limpio, comentado y listo para producción

@@ -1,211 +1,298 @@
-/* VARIABLES CORPORATIVAS */
+/* =========================================
+   NOVABANK CORP - DESIGN SYSTEM
+   Paleta Institucional & Variables Base
+   ========================================= */
 :root {
-    --primary-color: #003a70; /* Azul institucional */
-    --secondary-color: #f2a900; /* Dorado de acento */
-    --text-color: #333;
-    --bg-light: #f4f7f9;
-    --white: #ffffff;
-    --error-color: #d32f2f; /* Rojo para errores */
-    --success-color: #2e7d32; /* Verde para aprobado */
-    --hint-color: #666;
+  /* Colores Corporativos */
+  --nb-primary: #0A2540;
+  --nb-primary-hover: #06182A;
+  --nb-secondary: #1A4B7C;
+  --nb-accent: #C9A227; /* Dorado institucional para acentos */
+  
+  /* Superficies & Fondos */
+  --nb-bg: #F4F6F9;
+  --nb-surface: #FFFFFF;
+  --nb-surface-hover: #F8FAFC;
+  --nb-border: #CBD5E1;
+  
+  /* Tipografía */
+  --nb-text: #1E293B;
+  --nb-text-muted: #64748B;
+  --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+
+  /* Estados */
+  --nb-success: #059669;
+  --nb-success-bg: #ECFDF5;
+  --nb-error: #DC2626;
+  --nb-error-bg: #FEF2F2;
+
+  /* Espaciado & UI */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --shadow-sm: 0 1px 3px rgba(10, 37, 64, 0.08);
+  --shadow-md: 0 4px 12px rgba(10, 37, 64, 0.1);
+  --shadow-lg: 0 12px 28px rgba(10, 37, 64, 0.15);
+  --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* RESET Y ESTILOS BASE */
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
+/* =========================================
+   RESET & BASE
+   ========================================= */
+* { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: var(--bg-light);
-    color: var(--text-color);
-    padding: 15px;
-    display: flex;
-    justify-content: center;
+  font-family: var(--font-sans);
+  background-color: var(--nb-bg);
+  color: var(--nb-text);
+  line-height: 1.5;
+  padding: 2rem 1rem;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
 }
 
-/* CONTENEDOR PRINCIPAL RESPONSIVE */
+/* =========================================
+   LAYOUT & HEADER
+   ========================================= */
 .container {
-    width: 100%;
-    max-width: 850px;
-    background: var(--white);
-    padding: 2rem;
-    border-radius: 12px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 960px;
+  background: var(--nb-surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  padding: 2.5rem;
+  position: relative;
 }
 
 header {
-    text-align: center;
-    border-bottom: 3px solid var(--secondary-color);
-    margin-bottom: 2rem;
-    padding-bottom: 1rem;
+  text-align: center;
+  margin-bottom: 2.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--nb-border);
+}
+
+.brand-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.bank-logo {
+  width: 48px;
+  height: 48px;
+  color: var(--nb-primary);
 }
 
 header h1 {
-    color: var(--primary-color);
-    font-size: 1.8rem;
-    text-transform: uppercase;
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  font-weight: 700;
+  color: var(--nb-primary);
+  letter-spacing: -0.02em;
 }
 
-/* GRILLA DE FORMULARIO RESPONSIVE */
+header p {
+  font-size: 0.95rem;
+  color: var(--nb-text-muted);
+  margin-top: 0.25rem;
+}
+
+/* =========================================
+   FORMULARIO & GRID
+   ========================================= */
 .formulario-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1.5rem;
-    margin-bottom: 2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
 }
 
 .campo {
-    display: flex;
-    flex-direction: column;
-    position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
 }
 
 label {
-    font-weight: 600;
-    margin-bottom: 0.4rem;
-    color: var(--primary-color);
-    font-size: 0.9rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--nb-secondary);
 }
 
-input {
-    padding: 12px;
-    border: 1px solid #ced4da;
-    border-radius: 6px;
-    font-size: 1rem;
-    transition: all 0.3s ease;
+input[type="number"] {
+  width: 100%;
+  padding: 0.85rem 1rem;
+  font-size: 1rem;
+  font-family: var(--font-sans);
+  color: var(--nb-text);
+  background-color: var(--nb-surface-hover);
+  border: 1.5px solid var(--nb-border);
+  border-radius: var(--radius-md);
+  transition: var(--transition);
+  appearance: none;
+  -moz-appearance: textfield;
 }
 
-/* ESTADO DE FOCO E INDICACIONES DINÁMICAS */
-input:focus {
-    outline: none;
-    border-color: var(--primary-color);
-    box-shadow: 0 0 0 3px rgba(0, 58, 112, 0.1);
+/* Ocultar spinners nativos para estética bancaria limpia */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+
+input[type="number"]:focus {
+  outline: none;
+  border-color: var(--nb-secondary);
+  background-color: var(--nb-surface);
+  box-shadow: 0 0 0 3px rgba(26, 75, 124, 0.15);
 }
 
-/* Mensaje de indicación (Hint) */
+input.input-error {
+  border-color: var(--nb-error);
+  background-color: var(--nb-error-bg);
+}
+
+input.input-error:focus { box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.15); }
+
+/* Hints & Errores */
 .hint-text {
-    font-size: 0.75rem;
-    color: var(--hint-color);
-    margin-top: 4px;
-    display: none; /* Oculto por defecto */
+  font-size: 0.75rem;
+  color: var(--nb-text-muted);
+  opacity: 0;
+  transform: translateY(-4px);
+  transition: var(--transition);
+  height: 0;
+  overflow: hidden;
 }
 
-/* Mostrar indicación al situarse sobre el recuadro o escribir */
-input:focus + .hint-text, 
-input:hover + .hint-text {
-    display: block;
-}
-
-/* ESTADOS DE ERROR (VALIDACIONES) */
-.input-error {
-    border: 2px solid var(--error-color) !important;
-    color: var(--error-color) !important;
+input:focus + .hint-text,
+.campo:hover .hint-text {
+  opacity: 1;
+  transform: translateY(0);
+  height: auto;
 }
 
 .msg-error {
-    color: var(--error-color);
-    font-size: 0.75rem;
-    font-weight: bold;
-    margin-top: 2px;
-    min-height: 1rem;
+  font-size: 0.75rem;
+  color: var(--nb-error);
+  font-weight: 500;
+  min-height: 1.1rem;
+  display: block;
 }
 
-/* BOTONES */
+/* =========================================
+   BOTONES
+   ========================================= */
 .acciones {
-    display: flex;
-    gap: 1rem;
-    margin-top: 1rem;
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
 }
 
 button {
-    flex: 1;
-    padding: 14px;
-    border: none;
-    border-radius: 6px;
-    font-size: 1rem;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background 0.3s ease;
+  flex: 1;
+  padding: 0.9rem 1.5rem;
+  border: none;
+  border-radius: var(--radius-md);
+  font-size: 0.95rem;
+  font-weight: 600;
+  font-family: var(--font-sans);
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
 }
+
+button:active { transform: scale(0.98); }
 
 .btn-calcular {
-    background-color: var(--primary-color);
-    color: var(--white);
+  background-color: var(--nb-primary);
+  color: #FFFFFF;
+  box-shadow: var(--shadow-sm);
 }
-
-.btn-calcular:hover {
-    background-color: #002a50;
-}
+.btn-calcular:hover { background-color: var(--nb-primary-hover); box-shadow: var(--shadow-md); }
 
 .btn-limpiar {
-    background-color: #6c757d;
-    color: var(--white);
+  background-color: #E2E8F0;
+  color: var(--nb-secondary);
 }
+.btn-limpiar:hover { background-color: #CBD5E1; color: var(--nb-primary); }
 
-.btn-limpiar:hover {
-    background-color: #5a6268;
-}
-
-/* SECCIÓN DE RESULTADOS */
+/* =========================================
+   RESULTADOS & ESTADO
+   ========================================= */
 .resultados-section {
-    margin-top: 2rem;
-    padding: 1.5rem;
-    background: #f8f9fa;
-    border-left: 5px solid var(--primary-color);
-    border-radius: 6px;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 1rem;
+  margin-top: 2.5rem;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, #F8FAFC 0%, #EFF6FF 100%);
+  border: 1px solid var(--nb-border);
+  border-left: 4px solid var(--nb-accent);
+  border-radius: var(--radius-md);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1.25rem;
 }
 
 .resultado-item {
-    font-size: 0.85rem;
-    color: #555;
-    font-weight: 600;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  font-size: 0.75rem;
+  color: var(--nb-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 600;
 }
 
 .resultado-item span {
-    display: block;
-    font-size: 1.1rem;
-    color: var(--primary-color);
-    font-weight: 800;
+  font-size: 1.25rem;
+  color: var(--nb-primary);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  margin-top: 0.2rem;
 }
 
-/* ESTADO FINAL DE APROBACIÓN */
 #IblEstadoCredito {
-    margin-top: 1.5rem;
-    text-align: center;
-    font-size: 1.4rem;
-    font-weight: 800;
-    padding: 1rem;
-    border-radius: 6px;
-    min-height: 3.5rem;
+  margin-top: 2rem;
+  text-align: center;
+  font-size: 1.1rem;
+  font-weight: 700;
+  padding: 1.25rem;
+  border-radius: var(--radius-md);
+  min-height: 3.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: var(--transition);
 }
 
-.mensaje-aprobado {
-    background-color: #e8f5e9;
-    color: var(--success-color);
-    border: 2px solid var(--success-color);
+.mensaje-aprobado { background-color: var(--nb-success-bg); color: var(--nb-success); border: 1.5px solid var(--nb-success); }
+.mensaje-rechazado { background-color: var(--nb-error-bg); color: var(--nb-error); border: 1.5px solid var(--nb-error); }
+
+/* =========================================
+   RESPONSIVE BREAKPOINTS
+   ========================================= */
+@media (min-width: 768px) {
+  .formulario-grid { grid-template-columns: repeat(2, 1fr); }
+  .acciones { flex-direction: row; }
 }
 
-.mensaje-rechazado {
-    background-color: #ffebee;
-    color: var(--error-color);
-    border: 2px solid var(--error-color);
+@media (min-width: 1024px) {
+  .formulario-grid { grid-template-columns: repeat(3, 1fr); }
 }
 
-/* AJUSTES PARA MÓVILES EXTREMOS */
+@media (max-width: 768px) {
+  .container { padding: 1.5rem; }
+  .acciones { flex-direction: column; }
+  button { width: 100%; }
+}
+
 @media (max-width: 480px) {
-    .container {
-        padding: 1rem;
-    }
-    .acciones {
-        flex-direction: column;
-    }
-    header h1 {
-        font-size: 1.4rem;
-    }
+  body { padding: 1rem 0.5rem; }
+  .container { padding: 1.25rem; border-radius: var(--radius-md); }
+  .resultados-section { grid-template-columns: 1fr; gap: 1rem; }
+  header h1 { font-size: 1.35rem; }
 }

@@ -3,95 +3,100 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Simulador de Crédito Corporativo - Análisis de capacidad crediticia y riesgo financiero">
     <title>Simulador de Crédito | Banca Corporativa</title>
     <link rel="stylesheet" href="simulador.css">
-    <script src="funciones.js"></script>
-    <script src="simulador.js"></script>
 </head>
 <body>
 
-    <div class="container">
+    <main class="container">
+        <!-- HEADER CON IDENTIDAD CORPORATIVA -->
         <header>
-            <h1>Simulador de Crédito</h1>
-            <p>Análisis de capacidad crediticia y riesgo financiero</p>
+            <div class="brand-header">
+                <!-- Logo SVG Inline (Optimizado y accesible) -->
+                <svg class="bank-logo" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Logo NovaBank Corp" role="img">
+                    <path d="M4 40H44V44H4V40Z" fill="currentColor"/>
+                    <path d="M6 38H14V14H6V38Z" fill="currentColor"/>
+                    <path d="M17 38H25V8H17V38Z" fill="currentColor"/>
+                    <path d="M28 38H36V14H28V38Z" fill="currentColor"/>
+                    <path d="M39 38H42V22H39V38Z" fill="currentColor"/>
+                </svg>
+                <div>
+                    <h1>Simulador de Crédito</h1>
+                    <p>Análisis de capacidad crediticia y riesgo financiero</p>
+                </div>
+            </div>
         </header>
 
-        <main>
+        <!-- FORMULARIO DE SIMULACIÓN -->
+        <form id="formSimulador" onsubmit="return false;" aria-label="Formulario de simulación crediticia">
             <div class="formulario-grid">
-                
+                <!-- Ingresos -->
                 <div class="campo">
                     <label for="txtIngresos">Ingresos Mensuales (USD):</label>
-                    <input type="number" id="txtIngresos" placeholder="Ej: 1200" 
-                           oninput="if(this.value.length > 5) this.value = this.value.slice(0, 5); if(this.value < 0) this.value = 0;">
-                    <small id="hintIngresos" class="hint-text">Rango: $460 - $50,000</small>
-                    <span id="errIngresos" class="msg-error"></span>
+                    <input type="number" id="txtIngresos" placeholder="Ej: 2500" min="460" max="50000" step="0.01" autocomplete="off">
+                    <span class="hint-text">Rango: $460 - $50,000</span>
+                    <span id="errIngresos" class="msg-error" aria-live="polite"></span>
                 </div>
 
+                <!-- Egresos -->
                 <div class="campo">
                     <label for="txtEgresos">Egresos Mensuales (USD):</label>
-                    <input type="number" id="txtEgresos" placeholder="Ej: 600" 
-                           oninput="if(this.value.length > 5) this.value = this.value.slice(0, 5); if(this.value < 0) this.value = 0;">
-                    <small id="hintEgresos" class="hint-text">No debe superar sus ingresos</small>
-                    <span id="errEgresos" class="msg-error"></span>
+                    <input type="number" id="txtEgresos" placeholder="Ej: 1200" min="0" step="0.01" autocomplete="off">
+                    <span class="hint-text">No debe superar sus ingresos</span>
+                    <span id="errEgresos" class="msg-error" aria-live="polite"></span>
                 </div>
 
+                <!-- Monto Solicitado -->
                 <div class="campo">
                     <label for="txtMonto">Monto Solicitado (USD):</label>
-                    <input type="number" id="txtMonto" placeholder="Ej: 5000" 
-                           oninput="if(this.value.length > 6) this.value = this.value.slice(0, 6); if(this.value < 0) this.value = 0;">
-                    <small id="hintMonto" class="hint-text">Rango: $500 - $100,000</small>
-                    <span id="errMonto" class="msg-error"></span>
+                    <input type="number" id="txtMonto" placeholder="Ej: 15000" min="500" max="100000" step="0.01" autocomplete="off">
+                    <span class="hint-text">Rango: $500 - $100,000</span>
+                    <span id="errMonto" class="msg-error" aria-live="polite"></span>
                 </div>
 
+                <!-- Plazo -->
                 <div class="campo">
                     <label for="txtPlazo">Plazo del Crédito (Años):</label>
-                    <input type="number" id="txtPlazo" placeholder="Ej: 5" 
-                           oninput="if(this.value.length > 2) this.value = this.value.slice(0, 2); if(this.value < 1 && this.value !== '') this.value = 1;">
-                    <small id="hintPlazo" class="hint-text">Rango: 1 - 40 años</small>
-                    <span id="errPlazo" class="msg-error"></span>
+                    <input type="number" id="txtPlazo" placeholder="Ej: 5" min="1" max="40" step="1" autocomplete="off">
+                    <span class="hint-text">Rango: 1 - 40 años</span>
+                    <span id="errPlazo" class="msg-error" aria-live="polite"></span>
                 </div>
 
+                <!-- Tasa de Interés -->
                 <div class="campo">
                     <label for="txtTasaInteres">Tasa de Interés Anual (%):</label>
-                    <input type="number" id="txtTasaInteres" placeholder="Ej: 12" 
-                           oninput="if(this.value.length > 3) this.value = this.value.slice(0, 3); if(this.value < 0) this.value = 0;">
-                    <small id="hintTasa" class="hint-text">Rango: 1% - 100%</small>
-                    <span id="errTasa" class="msg-error"></span>
+                    <input type="number" id="txtTasaInteres" placeholder="Ej: 12.5" min="1" max="100" step="0.01" autocomplete="off">
+                    <span class="hint-text">Rango: 1% - 100%</span>
+                    <span id="errTasa" class="msg-error" aria-live="polite"></span>
                 </div>
             </div>
 
+            <!-- BOTONES DE ACCIÓN -->
             <div class="acciones">
-                <button class="btn-calcular" onclick="calcular()">Calcular Crédito</button>
-                <button class="btn-limpiar" onclick="limpiar()">Limpiar Formulario</button>
+                <button type="button" class="btn-calcular" onclick="calcular()">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="12" y2="14"/><line x1="8" y1="18" x2="12" y2="18"/></svg>
+                    Calcular Crédito
+                </button>
+                <button type="button" class="btn-limpiar" onclick="limpiar()">Limpiar Formulario</button>
             </div>
+        </form>
 
-            <div class="resultados-section">
-                <div class="resultado-item">
-                    Disponible:
-                    <span id="IblDisponibleValor">0.00</span>
-                </div>
-                <div class="resultado-item">
-                    Capacidad Pago:
-                    <span id="IblCapacidadValor">0.00</span>
-                </div>
-                <div class="resultado-item">
-                    Interés:
-                    <span id="IblinteresValor">0.00</span>
-                </div>
-                <div class="resultado-item">
-                    Total a Pagar:
-                    <span id="IblTotalValor">0.00</span>
-                </div>
-                <div class="resultado-item">
-                    Cuota Mensual:
-                    <span id="IblCuotaValor">0.00</span>
-                </div>
-            </div>
+        <!-- SECCIÓN DE RESULTADOS -->
+        <section class="resultados-section" aria-label="Resultados de la simulación">
+            <div class="resultado-item">Disponible: <span id="IblDisponibleValor">0.00</span></div>
+            <div class="resultado-item">Capacidad Pago: <span id="IblCapacidadValor">0.00</span></div>
+            <div class="resultado-item">Interés: <span id="IblinteresValor">0.00</span></div>
+            <div class="resultado-item">Total a Pagar: <span id="IblTotalValor">0.00</span></div>
+            <div class="resultado-item">Cuota Mensual: <span id="IblCuotaValor">0.00</span></div>
+        </section>
 
-            <div id="IblEstadoCredito">
-                </div>
-        </main>
-    </div>
+        <!-- ESTADO DE APROBACIÓN -->
+        <div id="IblEstadoCredito" aria-live="assertive"></div>
+    </main>
 
+    <!-- SCRIPTS DE LÓGICA -->
+    <script src="funciones.js"></script>
+    <script src="simulador.js"></script>
 </body>
 </html>

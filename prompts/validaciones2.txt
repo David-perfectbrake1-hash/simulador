@@ -1,0 +1,1 @@
+dame simulador.js y simulador.html completo

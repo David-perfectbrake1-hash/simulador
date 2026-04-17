@@ -1,13 +1,33 @@
-Actúa como un Tutor de Programación. Basado en el archivo 'Taller2_SimuladorCrédito-Parte3.pdf', necesito crear las validaciones para mi simulador.
+Actúa como un Tutor de Programación. 
+Basado en el archivo 'Taller2_SimuladorCrédito-Parte3.pdf', 
+necesito crear las validaciones para mi simulador.
 
 Instrucciones paso a paso:
 
-Crea un archivo validaciones.js: Define funciones individuales para validar que los campos no estén vacíos, que sean números positivos y que cumplan con rangos lógicos (ej. el plazo no puede ser 0).
+Crea un archivo validaciones.js: 
+Define funciones individuales para validar 
+que los campos no estén vacíos, 
+que sean números positivos 
+y que cumplan con rangos lógicos (ej. el plazo no puede ser 0).
 
-Inyección de Errores: Crea una función que permita insertar un mensaje de error en un <span> justo debajo de cada input en el HTML si la validación falla.
+Inyección de Errores: 
+Crea una función 
+que permita insertar un mensaje de error en un <span> 
+justo debajo de cada input en el HTML si la validación falla.
 
-Seccionamiento con Comentarios: Organiza el código en secciones claras (ej: 'Validaciones de Formato', 'Validaciones de Rango', 'Gestión de Mensajes en UI'). Cada sección debe tener un comentario detallado explicando qué hace y por qué es necesaria.
+Seccionamiento con Comentarios: 
+Organiza el código en secciones claras 
+(ej: 'Validaciones de Formato', 
+'Validaciones de Rango', 
+'Gestión de Mensajes en UI'). 
+Cada sección debe tener un comentario detallado 
+explicando qué hace y por qué es necesaria.
 
-Integración: Explícame cómo llamar a estas validaciones desde mi función calcular() en simulador.js para que, si hay un error, el cálculo se detenga y se muestren las alertas.
+Integración: 
+Explícame cómo llamar a estas validaciones 
+desde mi función calcular() en simulador.js 
+para que, si hay un error, el cálculo se detenga 
+y se muestren las alertas.
 
-Por favor, usa un lenguaje sencillo y asegúrate de que el código sea fácil de mantener.
+Por favor, usa un lenguaje sencillo 
+y asegúrate de que el código sea fácil de mantener.
