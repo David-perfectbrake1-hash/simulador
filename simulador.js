@@ -5,7 +5,12 @@
 // Configuración centralizada de límites por campo
 const FIELD_CONFIG = {
     txtIngresos:   { err: "errIngresos",  min: 460,  max: 50000,  maxD: 5 },
-    txtEgresos:    { err: "errEgresos",   min: 0,    max: 50000,  maxD: 5, dynamicMax: true },
+    // txtEgresos:    { err: "errEgresos",   min: 0,    max: 50000,  maxD: 5, dynamicMax: true },
+
+    txtArriendo:      { err: "errArriendo",      min: 0,    max: 10000,  maxD: 5 },
+    txtAlimentacion:  { err: "errAlimentacion",  min: 0,    max: 10000,  maxD: 5 },
+    txtVarios:        { err: "errVarios",        min: 0,    max: 10000,  maxD: 5 },
+
     txtMonto:      { err: "errMonto",     min: 500,  max: 100000, maxD: 6 },
     txtPlazo:      { err: "errPlazo",     min: 1,    max: 40,     maxD: 2 },
     txtTasaInteres:{ err: "errTasa",      min: 1,    max: 100,    maxD: 3 }
@@ -28,7 +33,9 @@ function validarCampo(input, idError, min, max, maxDigits = null) {
         mensajeError = `Mínimo permitido: ${min}`;
         esInvalido = true;
     } else if (valor > max) {
-        mensajeError = (input.id === "txtEgresos") ? "Supera sus ingresos disponibles" : `Máximo permitido: ${max}`;
+        // Personalizamos el mensaje para los nuevos campos de gastos
+        const esGasto = ["txtArriendo", "txtAlimentacion", "txtVarios"].includes(input.id);
+        mensajeError = esGasto ? "El valor excede el límite permitido" : `Máximo permitido: ${max}`;
         esInvalido = true;
     } else if (maxDigits !== null) {
         const digitosEnteros = Math.trunc(Math.abs(valor)).toString().length;
@@ -74,57 +81,56 @@ function aplicarLimiteDigitos(input, maxDigits) {
  */
 function calcular() {
     limpiarErrores();
-    const ids = ["txtIngresos", "txtEgresos", "txtMonto", "txtTasaInteres", "txtPlazo"];
+    
+    // 1. Obtener referencias
     const inputs = {};
-    ids.forEach(id => inputs[id] = document.getElementById(id));
+    Object.keys(FIELD_CONFIG).forEach(id => {
+        inputs[id] = document.getElementById(id);
+    });
 
-    // Validaciones con límite de dígitos
-    const maxEgresos = parseFloat(inputs.txtIngresos.value) || 0;
-    const v1 = validarCampo(inputs.txtIngresos, "errIngresos", 460, 50000, 5);
-    const v2 = validarCampo(inputs.txtEgresos, "errEgresos", 0, maxEgresos, 5);
-    const v3 = validarCampo(inputs.txtMonto, "errMonto", 500, 100000, 6);
-    const v4 = validarCampo(inputs.txtPlazo, "errPlazo", 1, 40, 2);
-    const v5 = validarCampo(inputs.txtTasaInteres, "errTasa", 1, 100, 3);
+    // 2. Validar todos los campos (Punto 4 de la rúbrica)
+    let esValido = true;
+    Object.keys(FIELD_CONFIG).forEach(id => {
+        const config = FIELD_CONFIG[id];
+        if (!validarCampo(inputs[id], config.err, config.min, config.max, config.maxD)) {
+            esValido = false;
+        }
+    });
 
-    if (!(v1 && v2 && v3 && v4 && v5)) return;
+    if (!esValido) return;
 
-    // Procesamiento con parseFloat (evita truncamiento de decimales)
+    // 3. Convertir valores a números
     const ingresos = parseFloat(inputs.txtIngresos.value);
-    const egresos = parseFloat(inputs.txtEgresos.value);
+    const arriendo = parseFloat(inputs.txtArriendo.value);
+    const alimentacion = parseFloat(inputs.txtAlimentacion.value);
+    const varios = parseFloat(inputs.txtVarios.value);
     const monto = parseFloat(inputs.txtMonto.value);
-    const tasa = parseFloat(inputs.txtTasaInteres.value);
     const plazo = parseFloat(inputs.txtPlazo.value);
+    const tasa = parseFloat(inputs.txtTasaInteres.value);
 
-    const disponible = calcularDisponible(ingresos, egresos);
+    // 4. Calcular Total Gastos (Punto 3 de la rúbrica)
+    const totalGastos = arriendo + alimentacion + varios;
+    document.getElementById("IblTotalGastos").textContent = totalGastos.toFixed(2);
+
+    // 5. Cálculos financieros (Punto 4 de la rúbrica)
+    const disponible = calcularDisponible(ingresos, totalGastos);
     const capacidad = calcularCapacidadPago(disponible);
+    const interes = calcularInteresSimple(monto, tasa, plazo);
+    const totalPagar = calcularTotalPagar(monto, interes);
+    const cuota = calcularCuotaMensual(totalPagar, plazo);
 
+    // 6. Mostrar resultados en pantalla
     document.getElementById("IblDisponibleValor").textContent = disponible.toFixed(2);
     document.getElementById("IblCapacidadValor").textContent = capacidad.toFixed(2);
-
-    const interes = calcularInteresSimple(monto, tasa, plazo);
-    const total = calcularTotalPagar(monto, interes);
-    const cuota = calcularCuotaMensual(total, plazo);
-
     document.getElementById("IblinteresValor").textContent = interes.toFixed(2);
-    document.getElementById("IblTotalValor").textContent = total.toFixed(2);
+    document.getElementById("IblTotalValor").textContent = totalPagar.toFixed(2);
     document.getElementById("IblCuotaValor").textContent = cuota.toFixed(2);
 
-    // Estado de aprobación
+    // 7. Lógica de aprobación
     const aprobado = aprobarCredito(capacidad, cuota);
-    const lblEstado = document.getElementById("IblEstadoCredito");
-
-    if (aprobado) {
-        lblEstado.textContent = "✔ CRÉDITO APROBADO";
-        lblEstado.className = "mensaje-aprobado";
-        lblEstado.innerHTML += `<br><small style="font-size: 0.85rem; font-weight: normal; display: block; margin-top: 10px; line-height: 1.4;">Análisis exitoso: Su capacidad de pago ($${capacidad.toFixed(2)}) cubre cómodamente la cuota mensual de $${cuota.toFixed(2)}.</small>`;
-    } else {
-        lblEstado.textContent = "✘ CRÉDITO RECHAZADO";
-        lblEstado.className = "mensaje-rechazado";
-        let mensaje = disponible <= 0 
-            ? "No cuenta con excedentes mensuales (Ingresos ≤ Egresos)." 
-            : `Capacidad insuficiente ($${capacidad.toFixed(2)} < $${cuota.toFixed(2)}). Aumente el plazo o reduzca el monto.`;
-        lblEstado.innerHTML += `<br><small style="font-size: 0.85rem; font-weight: normal; display: block; margin-top: 10px; line-height: 1.4;">${mensaje}</small>`;
-    }
+    const estado = document.getElementById("IblEstadoCredito");
+    estado.textContent = aprobado ? "✔ CRÉDITO APROBADO" : "✘ CRÉDITO RECHAZADO";
+    estado.className = aprobado ? "mensaje-aprobado" : "mensaje-rechazado";
 }
 
 /**
@@ -148,8 +154,7 @@ document.addEventListener("DOMContentLoaded", () => {
             aplicarLimiteDigitos(input, config.maxD);
             
             // ✅ Ejecuta validación visual y de rangos
-            const max = config.dynamicMax ? (parseFloat(document.getElementById("txtIngresos").value) || 0) : config.max;
-            validarCampo(input, config.err, config.min, max, config.maxD);
+            validarCampo(input, config.err, config.min, config.max, config.maxD);
         });
     });
 });
@@ -167,12 +172,20 @@ function limpiarErrores() {
  * Reset completo del simulador
  */
 function limpiar() {
-    ["txtIngresos", "txtEgresos", "txtMonto", "txtTasaInteres", "txtPlazo"].forEach(id => {
+    // Limpiar todos los inputs definidos en la configuración
+    Object.keys(FIELD_CONFIG).forEach(id => {
         document.getElementById(id).value = "";
     });
-    ["IblDisponibleValor", "IblCapacidadValor", "IblinteresValor", "IblTotalValor", "IblCuotaValor"].forEach(id => {
+
+    // Resetear etiquetas de resultados
+    const labels = [
+        "IblTotalGastos", "IblDisponibleValor", "IblCapacidadValor", 
+        "IblinteresValor", "IblTotalValor", "IblCuotaValor"
+    ];
+    labels.forEach(id => {
         document.getElementById(id).textContent = "0.00";
     });
+
     const estado = document.getElementById("IblEstadoCredito");
     estado.textContent = "";
     estado.className = "";

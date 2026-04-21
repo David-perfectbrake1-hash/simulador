@@ -58,12 +58,22 @@
                     <span id="errIngresos" class="msg-error" aria-live="polite"></span>
                 </div>
 
-                <!-- Egresos -->
                 <div class="campo">
-                    <label for="txtEgresos">Egresos Mensuales (USD):</label>
-                    <input type="number" id="txtEgresos" placeholder="Ej: 1200" min="0" step="0.01" autocomplete="off">
-                    <span class="hint-text">No debe superar sus ingresos</span>
-                    <span id="errEgresos" class="msg-error" aria-live="polite"></span>
+                    <label for="txtArriendo">Gastos Arriendo (USD):</label>
+                    <input type="number" id="txtArriendo" placeholder="Ej: 400" min="0" step="0.01" autocomplete="off">
+                    <span id="errArriendo" class="msg-error" aria-live="polite"></span>
+                </div>
+
+                <div class="campo">
+                    <label for="txtAlimentacion">Gastos Alimentación (USD):</label>
+                    <input type="number" id="txtAlimentacion" placeholder="Ej: 300" min="0" step="0.01" autocomplete="off">
+                    <span id="errAlimentacion" class="msg-error" aria-live="polite"></span>
+                </div>
+
+                <div class="campo">
+                    <label for="txtVarios">Gastos Varios (USD):</label>
+                    <input type="number" id="txtVarios" placeholder="Ej: 100" min="0" step="0.01" autocomplete="off">
+                    <span id="errVarios" class="msg-error" aria-live="polite"></span>
                 </div>
 
                 <!-- Monto Solicitado -->
@@ -103,6 +113,9 @@
 
         <!-- SECCIÓN DE RESULTADOS -->
         <section class="resultados-section" aria-label="Resultados de la simulación">
+
+            <div class="resultado-item">Total Gastos: <span id="IblTotalGastos">0.00</span></div>
+
             <div class="resultado-item">Disponible: <span id="IblDisponibleValor">0.00</span></div>
             <div class="resultado-item">Capacidad Pago: <span id="IblCapacidadValor">0.00</span></div>
             <div class="resultado-item">Interés: <span id="IblinteresValor">0.00</span></div>
